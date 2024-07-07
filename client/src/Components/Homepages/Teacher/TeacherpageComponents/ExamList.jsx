@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function ExamList() {
-  const [students, setStudents] = useState([]);
+  const [exams, setExams] = useState([]);
   const [refresh, setRefresh] = useState(0);
   const navigate = useNavigate();
 
@@ -10,16 +10,16 @@ function ExamList() {
     const teacherData = JSON.parse(localStorage.getItem("userdata"));
     const teacherId = teacherData._id;
 
-    fetch(`http://localhost:4000/teacher/students?teacherId=${teacherId}`)
+    fetch(`http://localhost:4000/teacher/exams?teacherId=${teacherId}`)
       .then((res) => res.json())
-      .then((data) => setStudents(data))
+      .then((data) => setExams(data))
       .catch((error) => {
-        console.error("Error fetching students:", error);
+        console.error("Error fetching exams:", error);
       });
   }, [refresh]);
 
-  const deleteStudent = (id) => {
-    fetch("http://localhost:4000/admin/deleteStudent", {
+  const deleteExam = (id) => {
+    fetch("http://localhost:4000/admin/deleteExam", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -33,7 +33,7 @@ function ExamList() {
         setRefresh((prev) => prev + 1); // Trigger a refresh
       })
       .catch((error) => {
-        console.error("Error deleting student:", error);
+        console.error("Error deleting exam:", error);
       });
   };
 
@@ -42,7 +42,7 @@ function ExamList() {
       <div className="bg-secondary rounded h-100 p-4">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h6 className="mb-4 text-uppercase fs-3">EXAMS</h6>
-          <Link className="btns btn-primary" to="/AddStudent">
+          <Link className="btns btn-primary" to="/AddExam">
             ADD EXAM
           </Link>
         </div>
@@ -52,29 +52,36 @@ function ExamList() {
               <th scope="col">#</th>
               <th scope="col">Examination Name</th>
               <th scope="col">Class</th>
-              <th scope="col">Date</th>
+              <th scope="col">Date of Exam</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {students.length === 0 ? (
+            {exams.length === 0 ? (
               <tr>
-                <td colSpan="5" className="text-center">
-                  No Students added
+                <td colSpan="7" className="text-center">
+                  No Exams added
                 </td>
               </tr>
             ) : (
-              students.map((student, index) => (
+              exams.map((exam, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{student.studentName}</td>
-                  <td>{student.classId.classname}</td>
-                  <td>{student.admissionNumber}</td>
+                  <td>{exam.examName}</td>
+                  <td>{exam.classId.classname}</td>
+                  <td>{new Date(exam.dateOfExam).toLocaleDateString()}</td>
+                  <td>{exam.startTime}</td>
+                  <td>{exam.endTime}</td>
                   <td>
+                    <Link to={`/ViewStudentAnswers?examId=${exam._id}`} className="btn btn-info ms-1">
+                      View Answers
+                    </Link>
                     <button
                       className="btn btn-danger ms-1"
                       style={{ padding: "5px 20px" }}
-                      onClick={() => deleteStudent(student._id)}
+                      onClick={() => deleteExam(exam._id)}
                     >
                       Delete
                     </button>

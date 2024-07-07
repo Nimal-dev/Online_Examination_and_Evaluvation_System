@@ -9,6 +9,9 @@ import Teachers from './Components/Homepages/Admin/AdminPageComponents/Teachers'
 import EditTeacher from './Components/Homepages/Admin/AdminPageComponents/Forms/EditTeacher';
 import AddClass from './Components/Homepages/Teacher/TeacherpageComponents/Forms/AddClass';
 import AddStudent from './Components/Homepages/Teacher/TeacherpageComponents/Forms/AddStudent';
+import AddExam from './Components/Homepages/Teacher/TeacherpageComponents/Forms/AddExam';
+import ExamList from './Components/Homepages/Teacher/TeacherpageComponents/ExamList';
+import ViewStudentAnswers from './Components/Homepages/Teacher/TeacherpageComponents/ViewStudentAnswers';
 
 function App() {
  
@@ -31,6 +34,9 @@ function App() {
 
        <Route path="/AddClass" element={<AddClass />} />
        <Route path="/AddStudent" element={<AddStudent />} />
+       <Route path="/ExamList" element={<ExamList />} />
+          <Route path="/AddExam" element={<AddExam />} />
+          <Route path="/ViewStudentAnswers" element={<ViewStudentAnswers />} />
 
 
        <Route path="/TeacherHome" element={<TeacherHomePage />} />
