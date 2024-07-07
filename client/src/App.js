@@ -8,6 +8,7 @@ import TeacherHomePage from './Components/Homepages/Teacher/TeacherHomePage';
 import Teachers from './Components/Homepages/Admin/AdminPageComponents/Teachers';
 import EditTeacher from './Components/Homepages/Admin/AdminPageComponents/Forms/EditTeacher';
 import AddClass from './Components/Homepages/Teacher/TeacherpageComponents/Forms/AddClass';
+import AddStudent from './Components/Homepages/Teacher/TeacherpageComponents/Forms/AddStudent';
 
 function App() {
  
@@ -29,6 +30,7 @@ function App() {
 
 
        <Route path="/AddClass" element={<AddClass />} />
+       <Route path="/AddStudent" element={<AddStudent />} />
 
 
        <Route path="/TeacherHome" element={<TeacherHomePage />} />

@@ -4,6 +4,7 @@ import Navbar from '../../Common/Navbar'
 import Widgets from '../../Common/Widgets'
 import StudentsList from './TeacherpageComponents/StudentsList'
 import ClassList from './TeacherpageComponents/ClassList'
+import ExamList from './TeacherpageComponents/ExamList'
 
 function TeacherHomePage() {
  
@@ -15,9 +16,10 @@ function TeacherHomePage() {
       <Navbar />
       <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-          <Widgets/>
+          {/* <Widgets/> */}
           <ClassList/>
           <StudentsList/>
+          <ExamList/>
         </div>
       </div>
     </div>

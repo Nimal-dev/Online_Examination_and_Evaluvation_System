@@ -3767,10 +3767,13 @@
     color: #F86F03;
     border-color: #F86F03;
   }
-  .btns{
+  .btns {
+    background-color: #F86F03;
     width: 150px;
-    border: none;
-    outline: none;
+    text-align: center;
+    align-items: center;
+    display: flex;            /* Added to use Flexbox */
+    justify-content: center;  /* Centers the text horizontally */
     height: 49px;
     border-radius: 4px;
     color: #fff;
@@ -3779,7 +3782,7 @@
     margin: 10px 0;
     cursor: pointer;
     transition: 0.5s;
-  }
+}
   .btn {
     width: 150px;
     background-color: #F86F03;

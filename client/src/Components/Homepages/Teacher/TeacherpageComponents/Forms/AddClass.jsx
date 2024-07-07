@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Sidebar from "../../../../Common/Sidebar";
+import Navbar from "../../../../Common/Navbar";
 
 function AddClass() {
   const [classname, setClassName] = useState("");
@@ -9,18 +11,25 @@ function AddClass() {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  const teacherData = JSON.parse(localStorage.getItem("userdata"));
+  const teacherId = teacherData._id;
+  console.log('=============================')  
+  console.log(teacherId)
+  console.log('=============================')
+
   const validateForm = () => {
     const formErrors = {};
     if (!classname.trim()) formErrors.classname = "Class Name is required";
     return Object.keys(formErrors).length === 0;
   };
+  
 
   const RegisterClass = () => {
     if (!validateForm()) return;
 
     const params = {
       classname: classname,
-    //   teacherid: auth,
+      teacherId: teacherId
     };
 
     fetch("http://localhost:4000/teacher/AddClass", {
@@ -41,9 +50,9 @@ function AddClass() {
         // Clear form fields after successful submission
         setClassName("");
         setErrors({});
-        //   setTimeout(() => {
-        //     window.location.reload();
-        //   }, 2000);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
       })
       .catch((error) => {
         console.error("Error adding Class:", error);
@@ -57,7 +66,11 @@ function AddClass() {
 
   return (
     <>
-      <div className="container-fluid">
+     <Sidebar/>
+    <div class="content">
+      <Navbar />
+      <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
         <div
           className="row h-100 align-items-center justify-content-center"
           style={{ minHeight: "100vh" }}
@@ -96,6 +109,8 @@ function AddClass() {
             </div>
           </div>
         </div>
+      </div>
+      </div>
       </div>
 
       <ToastContainer />

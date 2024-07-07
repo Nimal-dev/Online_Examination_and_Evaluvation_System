@@ -1,4 +1,3 @@
-// Updated Navbar.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,7 +7,6 @@ function Navbar() {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [usertype, setUsertype] = useState(null);
-
 
   useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem('userdata'));
@@ -24,15 +22,12 @@ function Navbar() {
     }
   }, []);
 
- 
   const handleLogout = () => {
     localStorage.removeItem('userdata');
-  
     toast.success('Logged out successfully!', {
       position: "top-right",
       autoClose: 1000,
     });
-  
     setTimeout(() => {
       navigate('/');
     }, 1500);
@@ -45,14 +40,16 @@ function Navbar() {
       </a>
       
       <div className="navbar-nav align-items-center ms-auto">
-        <div className="nav-item dropdown">
-          <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <span className="d-none d-lg-inline-flex">{name}</span>
-          </a>
-          <div className="dropdown-menu dropdown-menu-end bg-secondary rounded-0 rounded-bottom m-0">
-            <a href="#" className="dropdown-item" onClick={handleLogout}>Log Out</a>
+        {usertype && (
+          <div className="nav-item dropdown">
+            <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+              <span className="d-none d-lg-inline-flex">{name}</span>
+            </a>
+            <div className="dropdown-menu dropdown-menu-end bg-secondary rounded-0 rounded-bottom m-0">
+              <a href="#" className="dropdown-item" onClick={handleLogout}>Log Out</a>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Toast Container for notifications */}
@@ -62,3 +59,4 @@ function Navbar() {
 }
 
 export default Navbar;
+  
